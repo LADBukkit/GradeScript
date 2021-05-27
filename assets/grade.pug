@@ -1,4 +1,3 @@
-h1 Bewertung
 p
     strong Student: 
     | #{student}
@@ -7,6 +6,13 @@ p
     | #{corrector} 
 
 table 
+    if error
+        p 
+            strong Compiler Fehler =&gt; 0 Punkte
+            pre !{exception}
+            h1 Theoretische Bewertung
+    else
+        h1 Bewertung
     tr
         th Kategorie 
         th Punkte

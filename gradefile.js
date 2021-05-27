@@ -1,7 +1,6 @@
 const FS = require('fs')
 const SHOWDOWN = require('showdown')
 const PUG = require('pug')
-const PRETTIFY = require('html-prettify')
 const PATH = require('path')
 
 const converter = new SHOWDOWN.Converter()
@@ -17,6 +16,8 @@ class GradeFile {
         this.path = path
         this.directory = PATH.dirname(path)
         this.content = ''
+        this.error = false
+        this.exception = ''
 
         this.parseFile()
     }
@@ -39,8 +40,12 @@ class GradeFile {
         this.student = meta['student']
         this.corrector = meta['corrector']
         this.criteria = JSON.parse(FS.readFileSync(this.directory + meta['criteria']).toString())
+        this.error = !!meta['error']
     
         this.content = converter.makeHtml(split[1])
+        if(this.error) {
+            this.exception = split[2] || ''
+        }
     }
 
     toHTML() {
@@ -49,7 +54,9 @@ class GradeFile {
             corrector: this.corrector,
             content: this.content,
             points: this.points,
-            criteria: this.criteria
+            criteria: this.criteria,
+            error: this.error,
+            exception: this.exception
         }
         let html = ''
         if(this.template) {
@@ -61,7 +68,7 @@ class GradeFile {
 
         let style = FS.readFileSync(this.style || PATH.join(__dirname, 'assets/style.css')).toString()
 
-        return PRETTIFY(`<style>\n${style}\n</style>\n${html}`)
+        return `<style>\n${style}\n</style>\n${html}`
     }
 }
 

@@ -8,13 +8,17 @@ The output is the original filename + `.html`
 
 # The `.gmd` files
 The `.gmd` files are just normal markdown files with a little bit of metadata added to the top.
-The metadata is seperated by `===` so this is not valid markdown for the `.gmd` files.
+The files are divided into sections with the divider `===`.
+1. The metadata
+2. The comments on the grade
+3. The error that occurred (This is optional)
 
 Valid metadata keys are:
 | Key | Value |
 |-|-|
 | corrector | The name of the corrector |
 | criteria | The path to the criteria file (relative to the .gmd file) |
+| error | A boolean whether an error has occurred |
 | points | A JSON array of points (The amount of points must be atleast the same size as the amount criterias) |
 | student | The name of the student that is graded |
 | style (optional) | The path to the stylesheet (relative to the .gmd file) |
