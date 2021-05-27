@@ -1,0 +1,23 @@
+h1 Bewertung
+p
+    strong Student: 
+    | #{student}
+    br
+    strong Tutor: 
+    | #{tutor} 
+
+table 
+    tr
+        th Kategorie 
+        th Punkte
+    each n, i in criteria
+        tr 
+            td= i
+            td= n + ' P'
+    tr
+        th 
+            strong Summe
+        td
+            strong= Object.values(criteria).reduce((a, b) => a + b) + ' P'
+
+div !{content}
