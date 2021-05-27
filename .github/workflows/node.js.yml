@@ -24,13 +24,5 @@ jobs:
     - run: pkg .
     - uses: actions/upload-artifact@v2.2.3
       with:
-        name: gradescript-linux
-        path: dist/gradescript-linux
-    - uses: actions/upload-artifact@v2.2.3
-      with:
-        name: gradescript-macos
-        path: dist/gradescript-macos
-    - uses: actions/upload-artifact@v2.2.3
-      with:
-        name: gradescript-win.exe
-        path: dist/gradescript-win.exe
+        name: gradescript
+        path: dist/*
