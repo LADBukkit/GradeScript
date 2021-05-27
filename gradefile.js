@@ -32,12 +32,12 @@ class GradeFile {
 
         if(!meta['points']) throw `No 'points' defined in ${this.path}!`
         if(!meta['student']) throw `No 'student' defined in ${this.path}!`
-        if(!meta['tutor']) throw `No 'tutor' defined in ${this.path}!`
+        if(!meta['corrector']) throw `No 'corrector' defined in ${this.path}!`
         if(!meta['criteria']) throw `No 'criteria' defined in ${this.path}!`
 
         this.points = JSON.parse(meta['points'])
         this.student = meta['student']
-        this.tutor = meta['tutor']
+        this.corrector = meta['corrector']
         this.criteria = JSON.parse(FS.readFileSync(this.directory + meta['criteria']).toString())
     
         this.content = converter.makeHtml(split[1])
@@ -46,7 +46,7 @@ class GradeFile {
     toHTML() {
         let data = {
             student: this.student,
-            tutor: this.tutor,
+            corrector: this.corrector,
             content: this.content,
             points: this.points,
             criteria: this.criteria
