@@ -1,9 +1,9 @@
 # GradeScript
-Parses markdown files with metadata into html for grading students
+Parses markdown files with metadata into HTML for grading students
 
 # Usage
 gradescript <files..>  
-It automatically parse all the `.gmd` files passed to the program and recursively searches directories into html files.
+It automatically parse all the `.gmd` files passed to the program and recursively searches directories into HTML files.
 The output is the original filename + `.html`
 
 # The `.gmd` files
