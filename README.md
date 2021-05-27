@@ -18,7 +18,7 @@ Valid metadata keys are:
 |-|-|
 | corrector | The name of the corrector |
 | criteria | The path to the criteria file (relative to the .gmd file) |
-| error | A boolean whether an error has occurred |
+| error (optional) | A boolean whether an error has occurred |
 | points | A JSON array of points (The amount of points must be atleast the same size as the amount criterias) |
 | student | The name of the student that is graded |
 | style (optional) | The path to the stylesheet (relative to the .gmd file) |
