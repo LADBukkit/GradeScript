@@ -2,6 +2,7 @@ const FS = require('fs')
 const SHOWDOWN = require('showdown')
 const PUG = require('pug')
 const PATH = require('path')
+const INLINE = require('inline-css')
 
 const converter = new SHOWDOWN.Converter()
 const pugCompiled = PUG.compileFile(PATH.join(__dirname, 'assets/grade.pug'))
@@ -39,7 +40,7 @@ class GradeFile {
         this.points = JSON.parse(meta['points'])
         this.student = meta['student']
         this.corrector = meta['corrector']
-        this.criteria = JSON.parse(FS.readFileSync(this.directory + meta['criteria']).toString())
+        this.criteria = JSON.parse(FS.readFileSync(PATH.join(this.directory , meta['criteria'])).toString())
         this.error = !!meta['error']
     
         this.content = converter.makeHtml(split[1])
@@ -48,7 +49,7 @@ class GradeFile {
         }
     }
 
-    toHTML() {
+    toHTML(callback) {
         let data = {
             student: this.student,
             corrector: this.corrector,
@@ -68,7 +69,9 @@ class GradeFile {
 
         let style = FS.readFileSync(this.style || PATH.join(__dirname, 'assets/style.css')).toString()
 
-        return `<style>\n${style}\n</style>\n${html}`
+        INLINE(html, {extraCss: style, url: './'})
+        .then(callback)
+        .catch(console.log)
     }
 }
 

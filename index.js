@@ -5,14 +5,16 @@ const PATH = require('path')
 function processPath(path) {
     let stat = FS.lstatSync(path)
     if(stat.isDirectory()) {
-        FS.readdirSync(path).forEach(f => processPath(path + '/' + f))
+        FS.readdirSync(path).forEach(f => processPath(PATH.join(path, f)))
     } else {
         if(PATH.extname(path) == '.gmd') {
-            console.log('Found file ' + path)
+            console.log(`Found file ${path}`)
 
             let gf = new GradeFile(path)
-            FS.writeFileSync(path + '.html', gf.toHTML())
-            console.log('Converted to HTML')
+            gf.toHTML(html => {
+                FS.writeFileSync(path + '.html', html)
+                console.log(`Converted ${path} to HTML`)
+            })
         }
     }
 }

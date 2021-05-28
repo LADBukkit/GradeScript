@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "inline-css": "^3.0.0",
     "path": "^0.12.7",
     "pug": "^3.0.2",
     "showdown": "^1.9.1"
