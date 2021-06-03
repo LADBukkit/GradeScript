@@ -45,7 +45,7 @@ class GradeFile {
     
         this.content = converter.makeHtml(split[1])
         if(this.error) {
-            this.exception = split[2] || ''
+            this.exception = split.slice(2).join('===') || ''
         }
     }
 
