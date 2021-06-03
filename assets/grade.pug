@@ -19,11 +19,11 @@ table
     each n, i in criteria
         tr 
             td= i
-            td= n + ' P'
+            td= points[Object.keys(criteria).indexOf(i)] + '/' + n + ' P'
     tr
         th 
             strong Summe
         td
-            strong= Object.values(criteria).reduce((a, b) => a + b) + ' P'
+            strong= points.reduce((a, b) => a + b) + '/' + Object.values(criteria).reduce((a, b) => a + b) + ' P'
 
 div !{content}
